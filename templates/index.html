@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+AirSense AI
+</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="cursor"></div>
+
+<div id="three-container"></div>
+
+<nav class="navbar">
+
+<div class="logo">
+AirSense AI
+</div>
+
+<ul class="nav-links">
+
+<li>
+<a href="#features">
+Features
+</a>
+</li>
+
+<li>
+<a href="#analytics">
+Analytics
+</a>
+</li>
+
+<li>
+<a href="#prediction">
+Predict
+</a>
+</li>
+
+<li>
+<a href="#contact">
+Contact
+</a>
+</li>
+
+</ul>
+
+<button id="themeToggle">
+🌙
+</button>
+
+</nav>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<span class="tag">
+
+AI Powered Environmental Intelligence
+
+</span>
+
+<h1 class="hero-title">
+
+Know The Air <br>
+Before You <br>
+Breathe It
+
+</h1>
+
+<p class="hero-description">
+
+Predict future air quality using machine learning,
+environmental analytics and intelligent forecasting.
+
+</p>
+
+<div class="hero-buttons">
+
+<a href="#prediction">
+
+<button class="primary-btn">
+Predict AQI
+</button>
+
+</a>
+
+<a href="#analytics">
+
+<button class="secondary-btn">
+Explore Dashboard
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+<div class="hero-stats">
+
+<div class="glass-card stat">
+
+<h2>350+</h2>
+
+<p>
+Cities Covered
+</p>
+
+</div>
+
+<div class="glass-card stat">
+
+<h2>95%</h2>
+
+<p>
+Prediction Accuracy
+</p>
+
+</div>
+
+<div class="glass-card stat">
+
+<h2>24/7</h2>
+
+<p>
+Monitoring
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+id="features"
+class="features">
+
+<div class="section-header">
+
+<h2>
+Built For Modern Cities
+</h2>
+
+<p>
+Environmental intelligence designed for the future.
+</p>
+
+</div>
+
+<div class="features-grid">
+
+<div class="glass-card feature-card">
+
+<h3>
+AI Prediction
+</h3>
+
+<p>
+Predict AQI using machine learning models.
+</p>
+
+</div>
+
+<div class="glass-card feature-card">
+
+<h3>
+Weather Intelligence
+</h3>
+
+<p>
+Analyze environmental conditions.
+</p>
+
+</div>
+
+<div class="glass-card feature-card">
+
+<h3>
+Health Recommendations
+</h3>
+
+<p>
+Receive personalized air quality advice.
+</p>
+
+</div>
+
+<div class="glass-card feature-card">
+
+<h3>
+Analytics
+</h3>
+
+<p>
+Visualize AQI trends over time.
+</p>
+
+</div>
+
+<div class="glass-card feature-card">
+
+<h3>
+Smart Monitoring
+</h3>
+
+<p>
+Track PM2.5 and PM10 pollutants.
+</p>
+
+</div>
+
+<div class="glass-card feature-card">
+
+<h3>
+Global Coverage
+</h3>
+
+<p>
+Monitor locations around the world.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+id="analytics"
+class="analytics">
+
+<div class="section-header">
+
+<h2>
+Environmental Analytics
+</h2>
+
+<p>
+Beautiful insights powered by data.
+</p>
+
+</div>
+
+<div class="dashboard-grid">
+
+<div class="glass-card large-card">
+
+<h3>
+Current AQI
+</h3>
+
+<div class="aqi-display">
+
+<span class="aqi-number">
+72
+</span>
+
+<span class="aqi-status">
+Moderate
+</span>
+
+</div>
+
+</div>
+
+<div class="glass-card">
+
+<h3>PM2.5</h3>
+
+<p>42 µg/m³</p>
+
+</div>
+
+<div class="glass-card">
+
+<h3>PM10</h3>
+
+<p>88 µg/m³</p>
+
+</div>
+
+<div class="glass-card">
+
+<h3>Humidity</h3>
+
+<p>68%</p>
+
+</div>
+
+<div class="glass-card">
+
+<h3>Temperature</h3>
+
+<p>31°C</p>
+
+</div>
+
+</div>
+
+<div class="glass-card chart-container">
+
+<canvas id="aqiChart"></canvas>
+
+</div>
+
+</section>
+
+<section
+id="prediction"
+class="prediction">
+
+<div class="section-header">
+
+<h2>
+Predict Future Air Quality
+</h2>
+
+<p>
+Powered by Machine Learning
+</p>
+
+</div>
+
+<div class="prediction-wrapper glass-card">
+
+<form
+action="/predict"
+method="POST"
+class="prediction-form">
+
+
+
+<input type="number" step="0.01" name="temperature" placeholder="Temperature (°C)" required>
+
+<input type="number" step="0.01" name="humidity" placeholder="Humidity (%)" required>
+
+<input type="number" step="0.01" name="pm25" placeholder="PM2.5" required>
+
+<input type="number" step="0.01" name="pm10" placeholder="PM10" required>
+
+<input type="number" step="0.01" name="no2" placeholder="NO₂" required>
+
+<input type="number" step="0.01" name="so2" placeholder="SO₂" required>
+
+<input type="number" step="0.01" name="co" placeholder="CO" required>
+
+<input type="number" step="0.01" name="industrial" placeholder="Industrial Area Distance" required>
+
+<input type="number" step="0.01" name="population" placeholder="Population Density" required>
+
+<button
+type="submit"
+class="predict-btn">
+
+Predict Air Quality
+
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<section class="health-section">
+
+<div class="glass-card recommendation-card">
+
+<h2>
+AI Health Recommendations
+</h2>
+
+<div class="recommendation-list">
+
+<div class="recommendation">
+😷 Wear N95 Mask Outdoors
+</div>
+
+<div class="recommendation">
+🚶 Reduce Outdoor Exposure
+</div>
+
+<div class="recommendation">
+🏠 Keep Windows Closed
+</div>
+
+<div class="recommendation">
+🌿 Use Air Purifiers
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer id="contact">
+
+<h2>
+AirSense AI
+</h2>
+
+<p>
+Designed for a cleaner future.
+</p>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script
+src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+</body>
+</html>

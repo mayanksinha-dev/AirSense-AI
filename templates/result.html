@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Prediction Result | AirSense AI</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div id="cursor"></div>
+
+<div id="three-container"></div>
+
+<nav class="navbar">
+
+<div class="logo">
+AirSense AI
+</div>
+
+<a href="/">
+
+<button class="secondary-btn">
+← Back Home
+</button>
+
+</a>
+
+</nav>
+
+<section class="hero result-hero">
+
+<div class="glass-card result-card">
+
+<h4 class="result-label">
+
+AIR QUALITY PREDICTION
+
+</h4>
+
+<div class="aqi-result-number category-text
+{% if air_quality == 'Good' %}good
+{% elif air_quality == 'Moderate' %}moderate
+{% elif air_quality == 'Poor' %}poor
+{% else %}hazardous
+{% endif %}">
+{{ air_quality }}
+</div>
+
+<p class="result-message">
+
+Prediction generated using Machine Learning.
+
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="section-header">
+
+<h2>
+Environmental Inputs
+</h2>
+
+<p>
+Values used for prediction
+</p>
+
+</div>
+
+<div class="features-grid">
+
+{% for pollutant, value in pollutants.items() %}
+
+<div class="glass-card feature-card">
+
+<h3>
+{{ pollutant }}
+</h3>
+
+<p>
+{{ value }}
+</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+<section>
+
+<div class="glass-card summary-card">
+
+<h2>
+
+Prediction Summary
+
+</h2>
+
+<p>
+
+Based on the submitted environmental conditions,
+the predicted air quality category is:
+
+</p>
+
+<h1 class="prediction-category">
+
+{{ air_quality }}
+
+</h1>
+
+</div>
+
+</section>
+
+<section class="health-section">
+
+<div class="glass-card recommendation-card">
+
+<h2>
+Air Quality Guidance
+</h2>
+
+{% if air_quality == "Good" %}
+
+<div class="recommendation">
+✅ Air quality is healthy and safe.
+</div>
+
+<div class="recommendation">
+🏃 Outdoor activities are recommended.
+</div>
+
+{% elif air_quality == "Moderate" %}
+
+<div class="recommendation">
+⚠ Sensitive individuals should be cautious.
+</div>
+
+<div class="recommendation">
+🚶 Moderate outdoor activity is acceptable.
+</div>
+
+{% elif air_quality == "Poor" %}
+
+<div class="recommendation">
+😷 Wear a mask outdoors.
+</div>
+
+<div class="recommendation">
+🏠 Limit prolonged outdoor exposure.
+</div>
+
+{% else %}
+
+<div class="recommendation">
+🚨 Hazardous air quality detected.
+</div>
+
+<div class="recommendation">
+🏠 Stay indoors whenever possible.
+</div>
+
+{% endif %}
+
+</div>
+
+</section>
+
+<footer>
+
+<h2>
+AirSense AI
+</h2>
+
+<p>
+AI Powered Environmental Intelligence
+</p>
+
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>
